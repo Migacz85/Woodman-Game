@@ -1,5 +1,9 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+
+
 
 $a=7; $b=2;
 $_SESSION['a']=$a;$_SESSION['b']=$b;
@@ -24,7 +28,7 @@ $_SESSION['nick']=$nick;
  }
 
  if(ctype_alnum($nick)==false) {
-   $_SESSION['e_nick']="Nick może składac się tylko z liter i cyfr bez spacji";
+   $_SESSION['e_nick']="Nick moze skladac sie tylko z liter i cyfr bez spacji";
     $OKform=false;
  }
 ///////////////email
@@ -43,9 +47,9 @@ $pass2=$_POST['Rpass2'];
 
 if(isset($pass1) || isset($pass2) )
 {
-  if($pass1!=$pass2) {$_SESSION['e_pass']='Podane hasła się nie zgadzały'; unset($_SESSION['pass']);  $OKform=false; }
-  if(strlen($pass1)<=5 ) {$_SESSION['e_pass']='Hasło musi miec minimalnie 6 znakow i mniej niz 20 znakow'; unset($_SESSION['pass']);  $OKform=false;}
-  if(strlen($pass1)==strlen($pass2) && strlen($pass1)>=6) {$_SESSION['e_pass']="Hasło Ok";
+  if($pass1!=$pass2) {$_SESSION['e_pass']='Podane hasla sie nie zgadzaly'; unset($_SESSION['pass']);  $OKform=false; }
+  if(strlen($pass1)<=5 ) {$_SESSION['e_pass']='Haslo musi miec minimalnie 6 znakow i mniej niz 20 znakow'; unset($_SESSION['pass']);  $OKform=false;}
+  if(strlen($pass1)==strlen($pass2) && strlen($pass1)>=6) {$_SESSION['e_pass']="Haslo Ok";
     $_SESSION['pass']=$pass1;
    }
 }
@@ -56,7 +60,7 @@ $_SESSION['e_regulamin']="Musisz potwierdzic regulamin"; $OKform=false;
 
 if(isset($_POST['test']) ) {
 
-//$_SESSION['e_test']="Rozwiąż proste zadanie";
+//$_SESSION['e_test']="Rozwiaz proste zadanie";
 $wynikusera=$_POST['test'];
 if($wynikusera!=($a+$b)) {$_SESSION['e_test']="Wynik nie poprawny"; $OKform=false;  }
 if($wynikusera==($a+$b))  $_SESSION['e_test']="Wynik poprawny";
@@ -77,7 +81,7 @@ $polaczenie= new mysqli($host,$db_user,$db_password,$db_name);
     if(!$rezultat) throw new Exception($polaczenie->error);
     $ile_takich_maili=$rezultat->num_rows;
     if($ile_takich_maili>0) {
-      $_SESSION['e_email']="Podany email jest już zarejestrowany";
+      $_SESSION['e_email']="This email is already taken";
       $OKform=false;
     }
 //Sprawdzam czy w bazie jest juz nick
@@ -86,15 +90,32 @@ $polaczenie= new mysqli($host,$db_user,$db_password,$db_name);
     $ile_nickow=$rezultat->num_rows;
     if($ile_nickow>0) {
       $OKform=false;
-      $_SESSION['e_nick']="Podany nick jest juz zajety";
+      $_SESSION['e_nick']="This nick is already taken";
     }
     if($OKform==true && $wynikusera==$a+$b){ $pass=md5($pass1);
-    //  $aktualna_data=date("Y-m-d",time());
+     $aktualna_data=date("Y-m-d",time());
     //  $data_wygasniecia=Date('y:m:d', strtotime("+30 days"));
-        if($polaczenie->query("INSERT INTO uzytkownicy VALUES (NULL,'$nick','$email','$pass',100,100,1,now()+INTERVAL 14 DAY,NULL)"))
+        if($polaczenie->query("INSERT INTO uzytkownicy VALUES (NULL,'$nick','$email','$pass',100,100,now()+INTERVAL 14 DAY,0)")
+          )
+
           {
-          $_SESSION['Udana_rejestracja']=true;
-          header('Location: login.php');
+            $now =new DateTime("Europe/London");
+            $now->format('Y:m:d H:i:s');
+            $now=date_format($now, 'Y-m-d H:i:s');
+
+            $_SESSION['Udana_rejestracja']=true;
+            $polaczenie->query("INSERT INTO `characters` (`login`) VALUES ('$nick')");
+            $polaczenie->query("UPDATE `characters` SET
+              `Woodman_start` = '$now', `Stoneman_start` = '$now', `CoalMiner_start` = '$now', `GoldMiner_start` ='$now',
+              `wood_cap` = 160, `stone_cap` = 120, `coal_cap` = 100 , `gold_cap` = 70,
+              `Woodman_lvl` = 1, `Stoneman_lvl` = 1, `CoalMiner_lvl` = 1, `GoldMiner_lvl` = 1,
+              `Woodman` = '$now', `Stoneman` = '$now', `CoalMiner` = '$now', `GoldMiner` = '$now'
+
+
+            WHERE `characters`.`login` = '$nick'");
+            //`Woodman` = now(), `Stoneman` = now(), `CoalMiner` = now(), `GoldMiner` = now()
+//  `Woodman_start` = now(), `Stoneman_start` = now(), `CoalMiner_start` = now(), `GoldMiner_start` = now()
+          header('Location: index.php');
           } else {
           throw new Exception($polaczenie->error);
         }
@@ -121,7 +142,7 @@ $polaczenie= new mysqli($host,$db_user,$db_password,$db_name);
 }
 catch(Exception $e)
 {
-  echo "Błąd serwera";
+  echo "Blad serwera";
   echo "Informacja developerska".$e;
 }
 
@@ -131,14 +152,14 @@ catch(Exception $e)
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
-   <meta charset="utf-8"/>
+   <meta charset="ASCI"/>
    <title> SuperDuperGra </title>
 <link rel="stylesheet" type="text/css" href="style.css">
  </head>
 
 <body>
   <!-- REJESTRACJA  -->
-  Zarejestruj się: </br>
+  Zarejestruj sie: </br>
 
   <form action="registration.php" method="post">
 
@@ -175,7 +196,7 @@ catch(Exception $e)
 </br>
  </label>
 
- Udowodnij że nie jestes robotem:
+ Udowodnij ze nie jestes robotem:
  <?php
  echo "Ile jest ".$a."+".$b." ?";
  ?>

@@ -1,11 +1,4 @@
-<!DOCTYPE HTML>
-<html lang="pl">
-<head>
-   <meta charset="utf-8"/>
-   <title> Super Duper Game </title>
- </head>
-<body>
-  <?php
+<?php
   session_start();
   if(!isset($_POST['login']) || (!isset($_POST['pass'])) )
    {
@@ -13,12 +6,22 @@
        unset($_SESSION['blad'])  ;
      header('Location: index.php');
      exit();
-   }
+   } else header('Location: game.php');
+?>
+<!DOCTYPE HTML>
+<html lang="EN">
+<head>
 
+   <title> Super Duper Game </title>
+ </head>
+<body>
+
+
+<?php
   require_once "connect.php";
-  $connect = @new mysqli($host,$db_user,$db_password,$db_name);
+  $connect = new mysqli($host,$db_user,$db_password,$db_name);
   if ($connect->connect_errno!=0){
-    echo "Bład".$connect->connect_errno;
+    echo "Blad".$connect->connect_errno;
   } else {
 
     $login =$_POST['login'];
@@ -30,7 +33,7 @@
   //  $haslo = htmlentities($haslo,ENT_QUOTES,"UTF-8");
   //encje htmla, < &lt; < &gt;
 
-  //  echo "Połączyłem się z sukcesem z mysql:) </br>";
+  //  echo "Polaczylem sie z sukcesem z mysql:) </br>";
 //    $sql = "SELECT * FROM uzytkownicy WHERE login='$login' AND BINARY haslo='$password'";
     if($result=$connect->query(
     sprintf("SELECT * FROM uzytkownicy WHERE login='%s' ",
@@ -67,11 +70,11 @@
 
               $result->free(); //close{}; free(); free_result();
               header('Location: game.php');
-            }else {   $_SESSION['blad']="Błedne haslo";}header('Location: index.php');
+            }else {   $_SESSION['blad']="Bledne haslo";}header('Location: index.php');
         //polaczony
       } else {
         //bledny login lub haslo
-        $_SESSION['blad']="Nieprawidlowy login lub haslo, (sprawdź czy nie masz czasem włączonego Caps Locka)";
+        $_SESSION['blad']="Your login is incorect, (dont put your mail in login section, but your nick from registration)";
         header('Location: index.php');
       }
 

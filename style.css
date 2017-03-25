@@ -1,10 +1,171 @@
 body {
 
 background-color: lightgray;
+/*width:700px;*/
+
+/*color:white;*/
 }
 
-#indextlo{
+a:link {
+    color: lightgray;
+}
 
+/* visited link */
+a:visited {
+    color: gray;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: lightblue;
+}
+
+#clock {
+
+}
+.menu_tlo {
+   background-color: black;
+   border-radius:10px;
+  padding:5px;
+   background: rgba(25, 25, 25, .6);
+  color: white;
+  font-size: 16px;
+  /*position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;*/
+  width:400px;
+  float: left;
+}
+.menu_inside{
+      color:white;
+   /*width:45%;*/
+      height:80px;
+}
+.resources {
+float:left;
+}
+
+.Label_wood{float:left;}
+.Label_stone{float:left;}
+.Label_coal{float:left;}
+.Label_gold{float:left;}
+
+#wood{
+widht:10px;float:right;
+}
+#stone{
+  widht:10px;float:right;
+}
+#coal{
+widht:10px;float:right;
+}
+#gold{
+  widht:10px;float:right;
+}
+
+/*interesting fact*/
+#tip {
+  padding:5px;
+  float:30%;
+  width:auto;
+  height:80px;
+  color:white;
+  text-align: center;
+  /*background-color: blue;*/
+
+}
+#text_tip{
+  padding:20px;
+}
+
+#right {
+  padding:20px;
+  width:30%;
+  margin:2px;
+  border-radius:5px;
+  float:right;
+  color: white;
+  background: rgba(25, 25, 25, .6);
+
+}
+#left {
+width:60%;
+  float:left;
+  /*background-color: blue;*/
+}
+#Label_characters{
+
+    border-radius:5px;
+   background: rgba(25, 25, 25, .6);
+  padding:1%;
+  color:white;
+  float:left;
+  font-size: 20px;
+
+  text-align: left;
+  width:96%;
+  margin :1%;
+
+}
+
+.topmenu{
+  height:100%;
+}
+
+#wrapper{
+
+  padding-top: :30px;
+}
+
+.worker {
+  width: 150px;
+  height:  320x;
+  float:left;
+  margin:2px;
+  text-align: center;
+
+}
+
+@keyframes example {
+  0% {box-shadow: 0px 0px 0px #ffffff;}
+  25% {box-shadow: 0px 0px 150px #e86a6a;}
+  50% {box-shadow: 0px 0px 0px #48bf17;}
+  75% {box-shadow: 0px 0px 150px #26a4da;}
+  100% {box-shadow: 0px 0px 0px #ffffff;}
+}
+
+._upgrading{
+  //  -webkit-filter: contrast(120%);
+  //  box-shadow: 0px 0px 25px #ffffff;
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 10s;
+
+  /*animation-iteration-count: infinite;*/
+  }
+._resources{
+   -webkit-filter: sepia(100%);
+}
+
+#game {
+  background-attachment: float;
+  background-image: url(image/tlo1.jpg);
+  background-position: center center;
+  background-attachment:fixed;
+  -webkit-background-size: cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+}
+#indextlo{
   background-attachment: float;
   background-image: url(woodman.jpg);
   background-position: center center;
@@ -26,20 +187,25 @@ input {
 
    border-radius: 25px;
 }
+
 button {
   padding:20px;
   border-radius:25px;
  background-color:white;
- -webkit-box-shadow: 2px 10px 52px 0px rgba(0,0,0,0.75);
- -moz-box-shadow: 2px 10px 52px 0px rgba(0,0,0,0.75);
- box-shadow: 2px 10px 52px 0px rgba(0,0,0,0.75);
+ //-webkit-box-shadow: 2px 10px 52px 0px rgba(0,0,0,0.75);
+// -moz-box-shadow: 2px 10px 52px 0px rgba(0,0,0,0.75);
+ //box-shadow: 2px 10px 52px 0px rgba(0,0,0,0.75);
+ /*-webkit-filter: blur(2px);*/
+  /*-webkit-filter: grayscale(100%);*/
 }
-img {
-border-radius:25px;
-shadow:20px;
 
+#img_guys {
+border-radius:35px;
+shadow:20px;
 }
-#drwal {
-float:left;
-width:200px;
+
+#ico_res {
+border-radius:55px;
+height:15px;
+
 }

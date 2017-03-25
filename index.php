@@ -17,7 +17,7 @@ if(isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']==true) )
 <body id="indextlo">
   Welcom in super game where you can immerse yourself:)
   <?php
- if(isset($_SESSION['Udana_rejestracja']) ) { echo "</br> Z powodzeniem założyłeś konto. Możesz się logowac :) </br>";
+ if(isset($_SESSION['Udana_rejestracja']) ) { echo "</br> You created your account with Succes:) </br>";
   unset( $_SESSION['Udana_rejestracja'] );
  }
   ?>
@@ -26,7 +26,7 @@ if(isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']==true) )
   Login: <br/> <input type="text" name="login" /> </br>
   Password: <br/> <input type="password" name="pass" /> </br>
 
-  <input type="submit", value="Zaloguj się"/>
+  <input type="submit", value="Zaloguj sie"/>
   <a href="registration.php"> Register </a>
 </form>
 
